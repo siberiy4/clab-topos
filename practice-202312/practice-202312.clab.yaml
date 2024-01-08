@@ -1,0 +1,36 @@
+name: practice-202312
+
+topology:
+  nodes:
+    RT:
+      kind: linux
+      binds:
+        - RT:/etc/frr
+      image: quay.io/frrouting/frr:9.0.2
+    kinoko:
+      kind: linux
+      binds:
+        - kinoko:/etc/frr
+      image: quay.io/frrouting/frr:9.0.2
+    kinoko-server:
+      kind: linux
+      binds:
+        - kinoko-server:/etc/frr
+      image: quay.io/frrouting/frr:9.0.2
+    takenoko:
+      kind: linux
+      binds:
+        - takenoko:/etc/frr
+      image: quay.io/frrouting/frr:9.0.2
+    takenoko-server:
+      kind: linux
+      binds:
+        - takenoko-server:/etc/frr
+      image: quay.io/frrouting/frr:9.0.2
+
+  links:
+    - endpoints: ["kinoko:eth1", "RT:eth1"]
+    - endpoints: ["kinoko-server:eth1", "RT:eth2"]
+    - endpoints: ["takenoko:eth1", "RT:eth3"]
+    - endpoints: ["takenoko-server:eth1", "RT:eth4"]
+
