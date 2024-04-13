@@ -1,0 +1,32 @@
+{
+    "slurmVersion": 1,
+    "validationOutputFilters": {
+        "prefixFilters": [
+
+        ],
+        "bgpsecFilters": []
+    },
+    "locallyAddedAssertions": {
+        "prefixAssertions": [
+            {
+                "asn": 65001,
+                "prefix": "2001:db8::/32",
+                "maxPrefixLength": 48,
+                "comment": "Manual add"
+            },
+            {
+                "prefix": "192.168.0.0/24",
+                "maxPrefixLength": 24,
+                "asn": 65001,
+                "comment": "valid"
+            },
+            {
+                "prefix": "192.168.1.0/24",
+                "maxPrefixLength": 24,
+                "asn": 65001,
+                "comment": "valid"
+            }
+        ],
+        "bgpsecAssertions": []
+    }
+}

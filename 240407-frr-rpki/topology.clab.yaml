@@ -1,0 +1,39 @@
+name: rpki-frr
+
+topology:
+  nodes:
+    AS65000:
+      kind: linux
+      image: quay.io/frrouting/frr:10.0
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - AS65000/frr.conf:/etc/frr/frr.conf
+    AS65001:
+      kind: linux
+      image: quay.io/frrouting/frr:10.0
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - AS65001/frr.conf:/etc/frr/frr.conf
+    AS65002:
+      kind: linux
+      image: quay.io/frrouting/frr:10.0
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - AS65002/frr.conf:/etc/frr/frr.conf
+    stayrtr:
+      kind: linux
+      image: rpki/stayrtr:febec67d
+      binds:
+        - stayrtr/rpki.json:/rpki.json
+        - stayrtr/slurm.json:/slurm.json
+      ports:
+        - 8282:8282
+      cmd: -cache  /rpki.json -bind :8282 -disable.aspa -disable.bgpsec -checktime=false
+
+  links:
+    - endpoints: ["AS65000:eth1", "AS65001:eth1"]
+    - endpoints: ["AS65000:eth2", "AS65002:eth1"]
+
