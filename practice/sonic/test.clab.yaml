@@ -1,0 +1,15 @@
+name: sonic01
+
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vs
+      image: docker-sonic-vs:latest
+    sonic2:
+      kind: sonic-vs
+      image: docker-sonic-vs:latest
+
+  links:
+    - endpoints: ["sonic1:eth1", "sonic2:eth1"]
+
+

@@ -1,9 +1,9 @@
-# nw-practice
+# clab-topos
 
-containerlabでいい感じにできるやつ 
+containerlabで勉強 
 
 
-### vyosのコンテナを作る
+### vyosのコンテナイメージを作る
 
 create-vyos-docker/create-vyos-docker.sh の実行
 

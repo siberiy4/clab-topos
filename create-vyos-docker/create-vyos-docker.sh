@@ -1,5 +1,5 @@
 #!/bin/bash
-
+mkdir vyos && cd vyos
 echo "install jq"
 sudo apt install jq -y > /dev/null 2>&1
 LATEST=$(curl https://api.github.com/repos/vyos/vyos-rolling-nightly-builds/releases/latest ) > /dev/null 2>&1

@@ -1,0 +1,78 @@
+name: j53-3-3
+
+topology:
+  nodes:
+    Core1:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - Core1/frr.conf:/etc/frr/frr.conf
+    Core2:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - Core2/frr.conf:/etc/frr/frr.conf
+    Internal:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - Internal/frr.conf:/etc/frr/frr.conf
+    ISP-A:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - ISP-A/frr.conf:/etc/frr/frr.conf
+    ISP-B:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - ISP-B/frr.conf:/etc/frr/frr.conf
+    ISP-C:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - ISP-C/frr.conf:/etc/frr/frr.conf
+    IX-A:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - IX-A/frr.conf:/etc/frr/frr.conf
+    IX-B:
+      kind: linux
+      image: quay.io/frrouting/frr:9.0.2
+      binds:
+        - daemons:/etc/frr/daemons
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - IX-B/frr.conf:/etc/frr/frr.conf
+
+  links:
+    - endpoints: ["ISP-B:eth1", "ISP-C:eth1"]
+    - endpoints: ["ISP-B:eth2", "ISP-A:eth1"]
+    - endpoints: ["ISP-B:eth3", "IX-A:eth1"]
+    - endpoints: ["ISP-B:eth4", "IX-B:eth1"]
+    - endpoints: ["ISP-C:eth2", "ISP-A:eth2"]
+    - endpoints: ["ISP-C:eth3", "IX-A:eth2"]
+    - endpoints: ["ISP-C:eth4", "IX-B:eth2"]
+    - endpoints: ["ISP-A:eth3", "Core1:eth1"]
+    - endpoints: ["ISP-A:eth4", "Core2:eth1"]
+    - endpoints: ["IX-A:eth3", "Core1:eth2"]
+    - endpoints: ["IX-A:eth4", "Core2:eth2"]
+    - endpoints: ["IX-B:eth3", "Core1:eth3"]
+    - endpoints: ["IX-B:eth4", "Core2:eth3"]
+    - endpoints: ["Core1:eth4", "Core2:eth4"]
+    - endpoints: ["Core1:eth5", "Internal:eth1"]
+    - endpoints: ["Core2:eth5", "Internal:eth2"]

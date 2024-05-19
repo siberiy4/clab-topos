@@ -1,0 +1,95 @@
+{
+  "name": "sonic01",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-ccba0ce23f55",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "sonic1": {
+      "index": "0",
+      "shortname": "sonic1",
+      "longname": "clab-sonic01-sonic1",
+      "fqdn": "sonic1.sonic01.io",
+      "group": "",
+      "labdir": "/home/kaz/nw-practice/pr-sonic/clab-sonic01/sonic1",
+      "kind": "sonic-vs",
+      "image": "docker-sonic-vs:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccba0ce23f55",
+        "clab-node-group": "",
+        "clab-node-kind": "sonic-vs",
+        "clab-node-lab-dir": "/home/kaz/nw-practice/pr-sonic/clab-sonic01/sonic1",
+        "clab-node-name": "sonic1",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/kaz/nw-practice/pr-sonic/test.clab.yaml",
+        "containerlab": "sonic01"
+      },
+      "port-bindings": [
+      ]
+    },
+    "sonic2": {
+      "index": "1",
+      "shortname": "sonic2",
+      "longname": "clab-sonic01-sonic2",
+      "fqdn": "sonic2.sonic01.io",
+      "group": "",
+      "labdir": "/home/kaz/nw-practice/pr-sonic/clab-sonic01/sonic2",
+      "kind": "sonic-vs",
+      "image": "docker-sonic-vs:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccba0ce23f55",
+        "clab-node-group": "",
+        "clab-node-kind": "sonic-vs",
+        "clab-node-lab-dir": "/home/kaz/nw-practice/pr-sonic/clab-sonic01/sonic2",
+        "clab-node-name": "sonic2",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/kaz/nw-practice/pr-sonic/test.clab.yaml",
+        "containerlab": "sonic01"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "sonic1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:61:45:38",
+        "peer": "z"
+      },
+      "z": {
+        "node": "sonic2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:68:91:67",
+        "peer": "a"
+      }
+    }
+  ]
+}
