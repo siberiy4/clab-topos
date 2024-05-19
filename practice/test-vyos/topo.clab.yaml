@@ -1,0 +1,26 @@
+name: nw
+
+topology:
+  kinds:
+    linux:
+      image: vyos:latest
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+  nodes:
+    AS65000:
+      kind: linux
+      binds:
+        - AS65000/config.boot:/opt/vyatta/etc/config/config.boot
+    AS65001:
+      kind: linux
+      binds:
+        - AS65001/config.boot:/opt/vyatta/etc/config/config.boot
+
+    
+
+  links:
+    - endpoints: ["AS65000:eth1", "AS65001:eth1"]
+
+# cat  opt/vyatta/etc/config/config.boot
+# https://docs.vyos.io/en/stable/operation/boot-options.html#specify-custom-config-file
