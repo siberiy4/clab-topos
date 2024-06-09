@@ -1,0 +1,32 @@
+name: bgp-unnum
+
+topology:
+  kinds:
+    linux:
+      runtime: docker
+      image: quay.io/frrouting/frr:10.0
+      binds:
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - daemons:/etc/frr/daemons
+  nodes:
+    rt1:
+      kind: linux
+      binds:
+        - rt1/frr.conf:/etc/frr/frr.conf
+    rt2:
+      kind: linux
+      binds:
+        - rt2/frr.conf:/etc/frr/frr.conf
+    rt3:
+      kind: linux
+      binds:
+        - rt3/frr.conf:/etc/frr/frr.conf
+    rt4:
+      kind: linux
+      binds:
+        - rt4/frr.conf:/etc/frr/frr.conf
+  links:
+    - endpoints: ["rt1:eth1", "rt2:eth1"]
+    - endpoints: ["rt1:eth2", "rt3:eth1"]
+    - endpoints: ["rt4:eth1", "rt2:eth2"]
+    - endpoints: ["rt4:eth2", "rt3:eth2"]
