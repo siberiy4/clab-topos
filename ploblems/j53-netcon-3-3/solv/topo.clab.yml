@@ -1,62 +1,45 @@
 name: j53-3-3
 
 topology:
+  kinds:
+    linux:
+      runtime: docker
+      image: quay.io/frrouting/frr:10.0
+      binds:
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - daemons:/etc/frr/daemons
   nodes:
     Core1:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - Core1/frr.conf:/etc/frr/frr.conf
     Core2:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - Core2/frr.conf:/etc/frr/frr.conf
     Internal:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - Internal/frr.conf:/etc/frr/frr.conf
     ISP-A:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - ISP-A/frr.conf:/etc/frr/frr.conf
     ISP-B:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - ISP-B/frr.conf:/etc/frr/frr.conf
     ISP-C:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - ISP-C/frr.conf:/etc/frr/frr.conf
     IX-A:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - IX-A/frr.conf:/etc/frr/frr.conf
     IX-B:
       kind: linux
-      image: quay.io/frrouting/frr:9.0.2
       binds:
-        - daemons:/etc/frr/daemons
-        - vtysh.conf:/etc/frr/vtysh.conf
         - IX-B/frr.conf:/etc/frr/frr.conf
 
   links:
