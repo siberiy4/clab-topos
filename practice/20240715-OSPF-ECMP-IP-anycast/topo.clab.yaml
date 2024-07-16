@@ -1,0 +1,43 @@
+name: OSPF-ECMP-IP-anycast
+
+
+topology:
+  kinds:
+    linux:
+      runtime: docker
+      image: quay.io/frrouting/frr:10.0.1
+      binds:
+        - vtysh.conf:/etc/frr/vtysh.conf
+        - daemons:/etc/frr/daemons
+  nodes:
+    bb:
+      kind: linux
+      binds:
+        - bb/frr.conf:/etc/frr/frr.conf
+    router1:
+      kind: linux
+      binds:
+        - router1/frr.conf:/etc/frr/frr.conf
+    router2:
+      kind: linux
+      binds:
+        - router2/frr.conf:/etc/frr/frr.conf
+    dns1:
+      kind: linux
+      binds:
+        - dns1/frr.conf:/etc/frr/frr.conf
+    dns2:
+      kind: linux
+      binds:
+        - dns2/frr.conf:/etc/frr/frr.conf
+    server-area:
+      kind:  bridge
+
+  links:
+    - endpoints: ["bb:eth1", "router1:eth1"]
+    - endpoints: ["bb:eth2", "router2:eth1"]
+    - endpoints: ["server-area:eth1", "router1:eth2"]
+    - endpoints: ["server-area:eth2", "router2:eth2"]
+    - endpoints: ["server-area:eth3", "dns1:eth1"]
+    - endpoints: ["server-area:eth4", "dns2:eth1"]
+
